@@ -39,7 +39,9 @@ Conky是一种自由软件，用于X视窗系统的系统监视，可以在FreeB
 打开终端，输入一下内容：（conkyrc即conky配置文件）
 
     sudo gedit ~/.conkyrc
+
 开始配置，附上我的配置文件
+
 ```java
 # set to yes if you want Conky to be forked in the background
 background yes
@@ -111,8 +113,6 @@ no_buffers yes
 uppercase no
 # none, xmms, bmp, audacious, infopipe (default is none)
 # xmms_player bmp
-
-
 
 TEXT
 ${color white} ${font PizzaDude Bullets:size=16}S${font :size=10}   DATE $hr $font $color
