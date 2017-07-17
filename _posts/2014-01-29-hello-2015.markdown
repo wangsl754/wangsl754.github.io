@@ -9,73 +9,164 @@ tags:
     - Linux
 ---
 
-> “Yeah It's on. ”
+# 我的conky安装及配置——基于 ubuntu 16.04
+> “Yeah,I just do it ”
 
 
 ## 前言
-
-Hux 的 Blog 就这么开通了。
-
-[跳过废话，直接看技术实现 ](#build) 
-
-
-
-2015 年，Hux 总算有个地方可以好好写点东西了。
-
-
-作为一个程序员， Blog 这种轮子要是挂在大众博客程序上就太没意思了。一是觉得大部分 Blog 服务都太丑，二是觉得不能随便定制不好玩。之前因为太懒没有折腾，结果就一直连个写 Blog 的地儿都没有。
-
-在玩了一段时间知乎之后，答题的快感又激起了我开博客的冲动。之前的[个人网站](http://huangxuan.me/portfolio)是作品集形式的（现在集成进来了），并不适合用来写博文，一不做二不休，花一天搞一个吧！
-
-
+本人的第一篇博客终于正式上线，也不枉我这两天的辛苦。建站期间经历的种种，真是让人心累啊！好了，闲话休烦，步入正题。
 <p id = "build"></p>
 ---
 
-## 正文
+## conky简介
 
-接下来说说搭建这个博客的技术细节。  
+Conky是一种自由软件，用于X视窗系统的系统监视，可以在FreeBSD、OpenBSD和各种Linux发布上使用的自由软件。Conky具有很高的可配置性，可以监视许多系统参数，如：CPU、内存、交换内存、硬盘使用情况等状态；各种硬件的温度；系统的进程（top）；网络状态；电池电量；系统信息和邮件收发；各种音乐播放器MPD、XMMS2、BMPx、Audacious）的控制。不像其他系统监视器那样需要高级别的部件工具箱（widget toolkits）来渲染他们的信息，Conky可以直接在X视窗下渲染，这意味着在相同配置下Conky可以消耗更少的资源。
 
-正好之前就有关注过 [GitHub Pages](https://pages.github.com/) + [Jekyll](http://jekyllrb.com/) 快速 Building Blog 的技术方案，非常轻松时尚。
+## conky 安装
 
-其优点非常明显：
+一条命令足以
 
-* **Markdown** 带来的优雅写作体验
-* 非常熟悉的 Git workflow ，**Git Commit 即 Blog Post**
-* 利用 GitHub Pages 的域名和免费无限空间，不用自己折腾主机
-	* 如果需要自定义域名，也只需要简单改改 DNS 加个 CNAME 就好了 
-* Jekyll 的自定制非常容易，基本就是个模版引擎
+    sudo apt install conky-all
 
+## conky配置
 
-本来觉得最大的缺点可能是 GitHub 在国内访问起来太慢，所以第二天一起床就到 GitCafe(Chinese GitHub Copy，现在被 Coding 收购了) 迁移了一个[镜像](http://huxpro.coding.me)出来，结果还是巨慢。
+原装的conky感觉什么丑陋，而且功能也没完全发挥出来。所以要对conky进行配置。网上有很多酷炫的conky界面，而我还是比较喜欢简洁的画风。所以我的桌面就是这样的：
 
-哥哥可是个前端好嘛！ 果断开 Chrome DevTool 查了下网络请求，原来是 **pending 在了 Google Fonts** 上，页面渲染一直被阻塞到请求超时为止，难怪这么慢。  
-忍痛割爱，只好把 Web Fonts 去了（反正超时看到的也只能是 fallback ），果然一下就正常了，而且 GitHub 和 GitCafe 对比并没有感受到明显的速度差异，虽然 github 的 ping 值明显要高一些，达到了 300ms，于是用 DNSPOD 优化了一下速度。
+![2017-07-17 21-08-27屏幕截图.png-930.2kB][1]
 
 
+那么该怎么做呢？
+打开终端，输入一下内容：（conkyrc即conky配置文件）
 
----
+    sudo gedit ~/.conkyrc
+开始配置，附上我的配置文件
+```java
+# set to yes if you want Conky to be forked in the background
+background yes
+cpu_avg_samples 2
+net_avg_samples 2
+out_to_console no
+# X font when Xft is disabled, you can pick one with program    xfontsel
+#font 7x12
+#font 6x10
+#font 7x13
+#font 8x13
+#font 7x12
+#font *mintsmild.se*
+#font -*-*-*-*-*-*-34-*-*-*-*-*-*-*
+#font -artwiz-snap-normal-r-normal-*-*-100-*-*-p-*-iso8859-1
+# Use Xft?
+use_xft yes
+# Xft font when Xft is enabled
+xftfont Sans:size=9
+own_window_argb_visual yes
+#own_window_colour hotpink
+# Text alpha when using Xft
+xftalpha 0.8
+# on_bottom yes
+# mail spool
+mail_spool $MAIL
+# Update interval in seconds
+update_interval 1
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+#own_window_type override
+own_window_type normal
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+# Minimum size of text area
+minimum_size 100 3
+maximum_width 308
+# Draw shades?
+draw_shades no
+# Draw outlines?
+draw_outline no
+# Draw borders around text
+draw_borders no
+# Stippled borders?
+stippled_borders no
+# border margins
+border_margin 4
+# border width
+border_width 0
+# Default colors and also border colors
+default_color white
+default_shade_color white
+default_outline_color white
+# Text alignment, other possible values are commented
+#alignment top_left
+minimum_size 10 10
+gap_x 20
+gap_y 30
+alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+# Add spaces to keep things from moving about?  This only affects certain objects.
+use_spacer none
+# Subtract file system buffers from used memory?
+no_buffers yes
+# set to yes if you want all text to be in uppercase
+uppercase no
+# none, xmms, bmp, audacious, infopipe (default is none)
+# xmms_player bmp
 
-配置的过程中也没遇到什么坑，基本就是 Git 的流程，相当顺手
-
-大的 Jekyll 主题上直接 fork 了 Clean Blog（这个主题也相当有名，就不多赘述了。唯一的缺点大概就是没有标签支持，于是我给它补上了。）
-
-本地调试环境需要 `gem install jekyll`，结果 rubygem 的源居然被墙了……后来手动改成了我大淘宝的镜像源才成功
-
-Theme 的 CSS 是基于 Bootstrap 定制的，看得不爽的地方直接在 Less 里改就好了（平时更习惯 SCSS 些），**不过其实我一直觉得 Bootstrap 在移动端的体验做得相当一般，比我在淘宝参与的团队 CSS 框架差多了……**所以为了体验，也补了不少 CSS 进去
-
-最后就进入了耗时反而最长的**做图、写字**阶段，也算是进入了**写博客**的正轨，因为是类似 Hack Day 的方式去搭这个站的，所以折腾折腾着大半夜就过去了。
-
-第二天考虑中文字体的渲染，fork 了 [Type is Beautiful](http://www.typeisbeautiful.com/) 的 `font` CSS，调整了字号，适配了 Win 的渣渲染，中英文混排效果好多了。
 
 
-## 后记
+TEXT
+${color white} ${font PizzaDude Bullets:size=16}S${font :size=10}   DATE $hr $font $color
+${goto 1000}${time %l:%M}${font}${time %p}
+${time %A, %e %B %Y}
 
-回顾这个博客的诞生，纯粹是出于个人兴趣。在知乎相关问题上回答并获得一定的 star 后，我决定把这个博客主题当作一个小小的开源项目来维护。
+${color white}${font OpenLogos:size=18}L${font :size=10}   SYSTEM $hr $font
+$color $font$sysname: ${alignr} $kernel ($machine)
+$color Hostname: $alignr$nodename
+$color Uptime: $alignr$uptime
+$color System load: $alignr $loadavg
+$color Running Processes: $alignr $running_processes/$processes
+$color Running Threads: $alignr $running_threads/$threads
+$color Temp: ${alignr}${acpitemp}°C
 
-在经历 v1.0 - v1.5 的蜕变后，这个博客主题愈发完整，不但增加了诸多 UI 层的优化（opinionated）；在代码层面，更加丰富的配置项也使得这个主题拥有了更好的灵活性与可拓展性。而作为一个开源项目，我也积极的为其完善文档与解决 issue。
+${color white} ${font StyleBats:size=16}W${font :size=10}   CPU $hr $font $color
+$color ${font}CPU@${freq}MHz: ${cpu cpu1}% ${alignr}${cpubar cpu1 8,60}
+${color white}Top CPU $alignr PID $alignr $alignc CPU% $alignr MEM%
+$color${top name 1} $alignr ${top pid 1} $alignr ${top cpu 1} $alignr ${top mem 1}
+$color${top name 2} $alignr ${top pid 2} $alignr ${top cpu 2} $alignr ${top mem 2}
+$color${top name 3} $alignr ${top pid 3} $alignr ${top cpu 3} $alignr ${top mem 3}
 
-如果你恰好逛到了这里，希望你也能喜欢这个博客主题。
+${color white}${font StyleBats:size=16}A${font :size=10}   MEMORY $hr $font $color
+${color}${font}RAM: $mem/$memmax $alignr $memperc%
+$color ${membar}
+${color}${font}Swap: $swap/$swapmax $alignr $swapperc%
+$color ${swapbar}
+${color white}Top Mem $alignr PID $alignr CPU% $alignr MEM%
+$color${top_mem name 1}$alignr${top_mem pid 1}$alignr${top_mem cpu 1}$alignr${top_mem mem 1}
+$color${top_mem name 2}$alignr${top_mem pid 2}$alignr${top_mem cpu 2}$alignr${top_mem mem 2}
+$color${top_mem name 3}$alignr${top_mem pid 3}$alignr${top_mem cpu 3}$alignr${top_mem mem 3}
 
-—— Hux 后记于 2015.10
+${color white} ${font PizzaDude Bullets:size=16}N${font :size=10}   HDD $hr $font $color
+$color home: ${fs_used /home}/${fs_size /home} $alignr ${fs_free_perc /home}%
+$color ${fs_bar /home}
+
+${color white} ${font PizzaDude Bullets:size=16}G${font :size=10}   NETWORK $hr $font $color
+$color Local IP: $alignr${addr enp2s0}
+$color Down ${downspeed enp2s0}/s ${alignr}UpLoad ${upspeed enp2s0}/s
+${downspeedgraph enp2s0 25,107} ${alignr}${upspeedgraph enp2s0 25,107}
+$color Total ${totaldown enp2s0} ${alignr}Total ${totalup enp2s0}
+```
+使用该配置时会出现退到桌面时conky消失的现象（具体原因不明），但关闭切换器的“显示桌面图标”就好了。
+## conky开机自启动
+在dash里找启动应用程序。。。如图
+
+![2017-07-17 22-16-37屏幕截图.png-337.4kB][2]
 
 
+在之后出来的对话框中点击添加按钮，然后按照如图设置即可～～完成自启
+
+![2017-07-17 22-18-38屏幕截图.png-22.1kB][3]
+
+
+  [1]: http://static.zybuluo.com/wangsl754/nznljsscqse7eqf5ojmrigzw/2017-07-17%2021-08-27%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png
+  [2]: http://static.zybuluo.com/wangsl754/lgga4henlzv3wdvft3syl6y0/2017-07-17%2022-16-37%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png
+  [3]: http://static.zybuluo.com/wangsl754/j2nitull5eua40mjemgjdk5k/2017-07-17%2022-18-38%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png
