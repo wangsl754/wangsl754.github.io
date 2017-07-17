@@ -1,7 +1,6 @@
 ﻿---
 layout:     post
-title:      "我的conky安装及配置——基于 ubuntu 16.04"
-subtitle:   " \"conky\""
+title:      "我的conky安装与配置——基于 ubuntu 16.04"
 date:       2017-07-17 12:00:00
 author:     "slwang"
 header-img: "img/post-bg-2015.jpg"
@@ -9,7 +8,7 @@ catalog: true
 tags:
     - Linux
 ---
-#我的conky安装及配置——基于 ubuntu 16.04
+# 我的conky安装及配置——基于 ubuntu 16.04
 > “Yeah,I just do it ”
 
 
