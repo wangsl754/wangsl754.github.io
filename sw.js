@@ -13,14 +13,14 @@ const CACHE_NAMESPACE = 'main-'
 
 const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
 const PRECACHE_LIST = [
-  "./",
+   "./",
   "./offline.html",
   "./js/jquery.min.js",
   "./js/bootstrap.min.js",
   "./js/hux-blog.min.js",
   "./js/snackbar.js",
-  "./img/icon_wechat.png",
-  "./img/avatar-hux.jpg",
+  "./img/advatar.jpg",
+  "./img/avatar.jpg",
   "./img/home-bg.jpg",
   "./img/404-bg.jpg",
   "./css/hux-blog.min.css",
@@ -32,7 +32,7 @@ const PRECACHE_LIST = [
 ]
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
-  "huangxuan.me",
+  "wangsl123.github.io",
   "yanshuo.io",
   "cdnjs.cloudflare.com"
 ]
