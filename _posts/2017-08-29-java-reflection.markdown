@@ -23,7 +23,7 @@ tags:
                  
  Constructor类：表示类的构造器类型，Constructor实例就是某一个类的某个构造器
  
-##获取构造器创建实例
+## 获取构造器创建实例
 Constructor类：表示类的构造器类型，Constructor实例就是某一个类的某个构造器
 
 常用方法：
